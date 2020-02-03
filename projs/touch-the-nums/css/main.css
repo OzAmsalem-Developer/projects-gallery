@@ -1,0 +1,115 @@
+body{
+    text-align: center;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 65px;
+}
+
+.cell {
+    font-family: 'Fruktur', cursive;
+    padding: 15px;
+    background-color: #35495e;
+    font-size: 24px;
+    height: 35px;
+    width: 35px;
+    transition: .3s;
+    border-radius: 4px;
+    color: lightyellow;
+}
+
+.header {
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.header h4 {
+    font-size: 22px;
+}
+
+h4 span{
+    height: 23px;
+    width: 25px;
+    padding-right: 1px;
+    padding-bottom: 2px;
+    display: inline-block;
+    border: #35495e 2px solid;
+}
+
+.cell:hover {
+    cursor: pointer;
+}
+
+.timer-box {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: bold;
+    position: relative;
+    top: 7px;
+    left: 15px;
+    text-align: center;
+    font-size: 17px;
+    height: 50px;
+    padding-top: 5px;
+    width: 60px;
+    color: seashell;
+    background-color: #347474;
+    border-radius: 5px;
+    z-index: 0;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.timer {
+    position: relative;
+    margin: 1px;
+    z-index: 1;
+}
+
+.menu {
+    
+    position: absolute;
+    top: 0;
+    left: -1%;
+    right: 0;
+    margin: auto;
+    margin-top: 110px;
+    margin-bottom: 30px;
+}
+
+
+/* Helper classes */
+
+.clicked {
+    background-color: lightsalmon;
+    color: black;
+}
+
+.myButton {
+    box-shadow: inset 0px 1px 0px 0px #dcecfb;
+    background: linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+    background-color: #59c4b9;
+    border-radius: 6px;
+    border: 1px solid #84bbf3;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 11px 18px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #528ecc;
+}
+
+.myButton:hover {
+    background: linear-gradient(to bottom, #80b5ea 5%, #bddbfa 100%);
+    background-color: #80b5ea;
+}
+
+.myButton:active {
+    position: relative;
+    top: 1px;
+}
+.btn3 {
+    padding: 11px 12px;
+}
