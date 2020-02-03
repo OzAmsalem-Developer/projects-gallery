@@ -3,10 +3,10 @@
 $(document).ready(init);
 
 function init() {
-    renderProjs();
+    _renderProjs();
 }
 
-function renderProjs() {
+function _renderProjs() {
     let projs = getProjs();
     let projsStrHTMLs = projs.map(function (proj, idx) {
         return `
@@ -71,15 +71,13 @@ function renderProjs() {
 }
 
 function onContact() {
-    let email = $('.email').val();
     let subject = $('.subject').val();
     let message = $('.body-message').val();
 
-    let link = `https://mail.google.com/mail/u/0/?view=cm&fs=1&
+    let link = `https://mail.google.com/mail/?view=cm&fs=1&
     to=ozamsalem8@gmail.com
     &su=${subject}
-    &body=${message}
-    &bcc=${email}&tf=1`;
+    &body=${message}`;
 
     window.open(link, '_blank');
 
