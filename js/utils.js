@@ -2,8 +2,7 @@
 
 function getImgUrl(name, isFull=false) {
     let imgUrl = 'img/portfolio/' + name.toLowerCase().split(' ').join('-');
-    imgUrl += (isFull)? '-full' : '';
-    imgUrl += '.jpg';
+    imgUrl += (isFull)? '-full.jpg' : '.jpg';
     
     return imgUrl;
 }
