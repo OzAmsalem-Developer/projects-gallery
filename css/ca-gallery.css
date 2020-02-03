@@ -240,6 +240,10 @@ header.masthead {
     }
 }
 
+.intro-lead-in {
+    text-shadow: -3px 0px 0px rgb(255, 253, 142);
+}
+
 header.masthead .intro-text {
     padding-top: 150px;
     padding-bottom: 100px;
