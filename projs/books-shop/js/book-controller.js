@@ -1,20 +1,23 @@
 'use strict';
 
 function onInit() {
+    createTranses();
     renderBooks();
+    doTrans();
 }
 
 function renderBooks() {
     let books = getBooksForDisplay();
 
     let strHTMLs = books.map(function (book) {
-        let readBtn = `<button class="action-btn btn" onclick="onOpenModal(${book.id})">Read</button>`;
-        let updateBtn = `<button class="action-btn btn" onclick="onEditBook(${book.id})">Update</button>`;
-        let deleteBtn = `<button class="action-btn btn" onclick="onRemoveBook(${book.id})">Delete</button>`;
+        let readBtn = `<button data-trans="read-btn" class="action-btn btn" onclick="onOpenModal(${book.id})">Read</button>`;
+        let updateBtn = `<button data-trans="update-btn" class="action-btn btn" onclick="onEditBook(${book.id})">Update</button>`;
+        let deleteBtn = `<button data-trans="delete-btn" class="action-btn btn" onclick="onRemoveBook(${book.id})">Delete</button>`;
 
         return `
         <tr>
-            <td>${book.id}</td><td>${book.name}</td><td>${book.price}$</td>
+            <td>${book.id}</td><td>${book.name}</td>
+            <td>${ formatCurrency(book.price)}</td>
             <td>${readBtn}</td><td>${updateBtn}</td><td>${deleteBtn}</td>
         </tr>`
     })
@@ -66,7 +69,7 @@ function onOpenModal(bookId) {
     let book = getBook(bookId);
     let elModal = document.querySelector('.modal');
     elModal.querySelector('h3').innerText = book.name;
-    elModal.querySelector('span').innerText = book.price + '$';
+    elModal.querySelector('.book-price-modal').innerText = formatCurrency(book.price);
     elModal.querySelector('img').src = 'img/' + book.imgName + '.png';
     elModal.querySelector('.rate').innerText = book.rate;
 
@@ -90,6 +93,7 @@ function onCloseModal() {
 function onChangePage(diff) {
     changePage(diff)
     renderBooks();
+    doTrans();
 }
 
 function onChangeRate(operator, bookId) {
@@ -103,4 +107,15 @@ function onChangeRate(operator, bookId) {
 function onChangeSort(sortBy) {
     setSortBy(sortBy);
     renderBooks();
+}
+
+function onSetLang(lang) {
+    setLang(lang);
+    if (lang === 'he') {
+        document.body.classList.add('rtl');
+    } else {
+        document.body.classList.remove('rtl');
+    }
+    renderBooks();
+    doTrans();
 }

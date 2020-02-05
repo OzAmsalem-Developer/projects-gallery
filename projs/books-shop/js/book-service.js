@@ -60,14 +60,18 @@ function setSortBy(sortBy) {
     gCurrPage = 1;
 }
 
-function getImgName(name) {
-    let imgName = name.toLowerCase().split(' ').join('-');
-    return imgName;
+function getCabab(name) {
+    let cababCaseName = name.toLowerCase().split(' ').join('-');
+    return cababCaseName;
+}
+
+function getPage() {
+    return gCurrPage;
 }
 
 // Private functions:
 function _createBooks() {
-   let books = ['Harry Potter', 'Be a dog', 'Froggramming', 'Kingdom man', 'Tree', 'Secret garden']
+    let books = ['Harry Potter', 'Be a dog', 'Froggramming', 'Kingdom man', 'Tree', 'Secret garden']
         .map(_createBook);
 
     return books;
@@ -78,7 +82,8 @@ function _createBook(name, idx, arr, price) {
         id: parseInt(Math.random() * 10000 + 5),
         name: name,
         price: (price) ? price : parseInt(Math.random() * 100),
-        imgName: getImgName(name),
+        imgName: getCabab(name),
+        isImg: (price) ? false : true,
         rate: 0
     }
 }
@@ -92,14 +97,15 @@ function _getStoragedBooks() {
 }
 
 function _sortBooks() {
-    if(gSortBy === 'lastAdded') return;
+    if (gSortBy === 'lastAdded') return;
     if (gSortBy === 'price' || gSortBy === 'id') {
         gBooks.sort((a, b) => +a[gSortBy] - +b[gSortBy]);
     }
     if (gSortBy === 'name') {
         gBooks.sort((a, b) => {
-            let lowA = a.name.toLowerCase();
-            let lowB = b.name.toLowerCase();
+            // Supporting all langs sorting
+            let lowA = gTrans[a.imgName][gCurrLang];
+            let lowB = gTrans[b.imgName][gCurrLang];
 
             if (lowA < lowB) return -1;
             if (lowA > lowB) return 1;
@@ -107,4 +113,5 @@ function _sortBooks() {
         });
     }
 }
+
 

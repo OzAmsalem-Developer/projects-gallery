@@ -5,25 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Books shop</title>
+    <title data-trans="title">Books shop</title>
     <script src="https://kit.fontawesome.com/080d8fc695.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link class="bs-link" rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body onload="onInit()">
+
+    <nav class="navbar navbar-light bg-dark">
+        <a data-trans="title" class="navbar-brand text-light">Books Shop</a>
+        <form class="form-inline ">
+            <select class="form-control" onchange="onChangeLang(this.value)">
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+                <option value="es">Spanish</option>
+            </select>
+        </form>
+      </nav>
+
+
+
     <header>
         <a name="top"></a>
-        <h1>Books Shop</h1>
-        <img src="img/logo.png" alt="Logo">
+        <img src="img/logo.png" alt="Logo"/>
     </header>
 
-    <table>
+
+
+    <table class="table table-hover table-dark">
         <thead>
             <tr>
-                <td class="sorter" onclick="onChangeSort('id')">id</td>
-                <td class="book-title sorter" onclick="onChangeSort('name')">Title</td>
-                <td class="sorter" onclick="onChangeSort('price')">Price</td>
-                <td colspan="3">Action</td>
+                <td scope="col" data-trans="id-td" class="sorter" onclick="onChangeSort('id')">id</td>
+                <td scope="col" data-trans="title-td" class="book-title-td sorter" onclick="onChangeSort('name')">Title</td>
+                <td data-trans="price-td" class="sorter" onclick="onChangeSort('price')">Price</td>
+                <td data-trans="action-td" colspan="3">Action</td>
             </tr>
         </thead>
         <tbody class="book-table"></tbody>
@@ -31,36 +50,84 @@
 
     <div class="page-btns">
         <button onclick="onChangePage(-1)"><i class="fas fa-arrow-circle-left"></i></button>
+        <span class="page-num mx-5 font-weight-bold"></span>
         <button onclick="onChangePage(1)"><i class="fas fa-arrow-circle-right"></i></button>
     </div>
-
+    
     <section class="book-edit">
-        <h2>Add/Edit Book</h2>
-        <input placeholder="New book title" type="text" class="book-name" data-id="" />
-        <input placeholder="$$" type="number" class="book-price" />
-        <button class="btn" onclick="onSaveBook()">Save</button>
+        <h2 class="add-edit-book mb-4 p-3" data-trans="add-book">Add Book</h2>
+        <form class="add-book-form">
+            <div class="form-group en-name">
+                <label data-trans="title-in" class="title-in-english" hidden>Title in English</label>
+                <input data-trans="en-label" type="text" class="form-control" placeholder="English book name" required/>
+            </div>
+            <div class="form-group es-name">
+                <input data-trans="es-label" type="text" class="form-control" placeholder="Spanish book name" required/>
+            </div>
+            <div class="form-group he-name">
+                <input  data-trans="he-label" type="text" class="form-control" placeholder="Hebrew book name" required/>
+            </div>
+            <div class="form-group p-2">
+                <label data-trans="price-label">Book Price</label>
+                <input placeholder="$" type="number" class="form-control book-price" required/> ($)
+            </div>
+
+            <button type="button" data-trans="save-btn" class="btn btn-warning" onclick="onSaveBook()">Save</button>
+            <button type="button" data-trans="add-btn" class="btn add-new btn-warning" onclick="renderAddSection(false)" hidden>Add New</button>
+        </form>
+
     </section>
 
-    <section class="modal" hidden>
-        <button class="btn" onclick="onCloseModal()">x</button>
-        <h3></h3>
-        <img src="" alt="Book image">
-        <p>Book Price: <span></span></p>
-        <p>Book rate:</p>
-        <div class="minus-rate"></div>
-        <span class="rate"></span>
-        <div class="plus-rate"></div>
+        <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <img src="" alt="Book image">
+            <p data-trans="lorem"></p>
+            <p> <span data-trans="price-modal">Book Price: </span><span class="book-price-modal"></span></p>
+            <p data-trans="rate-modal">Book rate:</p>
+            <div class="minus-rate"></div>
+            <span class="rate"></span>
+            <div class="plus-rate"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-trans="close-modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+       
     </section>
 
     <a name="foot"></a>
     <footer>
-        <p>coffeerights &copy; 2020 </p>
-        <a href="#top">Scroll to Top</a>
+        <a href="#top" data-trans="scroll">Scroll to Top</a>
+        <p> <span data-trans="rights">coffeerights</span> &copy; 2020</p>
     </footer>
 
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script src="js/i18n-service.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/book-service.js"></script>
-    <script src="js/book-controller.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
